@@ -1,12 +1,13 @@
-# PROYECTO-PRINCIPAL-Metodologia-de-Sistemas-I
 
-Proyecto principal!
+### Pasos de instalacion
 
-## API REST
-**Entorno propuesto:** máquina virtual con docker
-Se desarrolla un Producto Software en equipo
-Diseño de la solución, diagrama de clases y de base de datos
-Cada equipo designa un líder, quien será responsable de dividir las tareas
-Programar hasta lograr un producto funcional
-Al final de la cátedra se defiende el trabajo realizado
+1. ir a la carpeta `server` con un `cd server`
+
+2. Para poder instalar las dependencias y que el ide las detecte ejecutar un `yarn install` en caso que yarn no exista usar un `npm install`
+
+3. Luego construir la imagen con un `sudo docker build .`
+
+4. Nos movemos a la carpeta del docker con un `cd ../docker` y ejecutamos un `sudo docker-compose up --build`
+
+5. En caso de mostrar algun error ejecutar un `docker exec -it server sh` y ejecutar un `yarn install`
 
