@@ -1,4 +1,4 @@
-export class Visitor {
+class Visitor {
     id: string;
     ip: string;
     nickname: string;
@@ -9,3 +9,5 @@ export class Visitor {
         this.nickname = nickname;
     }
 }
+
+export default Visitor;
