@@ -1,5 +1,5 @@
-import {Visitor} from "./visitor.entity.ts";
-import {Category} from "./category.entity.ts";
+import Visitor from "./visitor.entity.ts";
+import Category from "./category.entity.ts";
 class Claim{
     id: string;
     owner: Visitor;
