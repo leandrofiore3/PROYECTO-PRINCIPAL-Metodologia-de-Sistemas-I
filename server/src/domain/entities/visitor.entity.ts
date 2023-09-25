@@ -8,6 +8,10 @@ class Visitor {
         this.ip = ip;
         this.nickname = nickname;
     }
+
+    getId(): string {
+        return this.id;
+    }
 }
 
 export default Visitor;

@@ -1,14 +1,14 @@
 import Category from '../../domain/entities/category.entity';
 
-class CategoryReporitory{
+class CategoryReporitory {
 
     private categories: Category[];
 
-    public constructor(){
+    public constructor() {
         this.categories = [];
     }
 
-    public async save(category:Category): Promise<void>{
+    public async save(category: Category): Promise<void> {
 
         const saveCategory = this.categories.find(a => a.getId() === category.getId());
 
@@ -21,15 +21,15 @@ class CategoryReporitory{
 
     public async findOneById(id: string): Promise<Category | null> {
 
-        const category = this.categories.find( a => a.getId() === id);
+        const category = this.categories.find(a => a.getId() === id);
 
         return category ? category : null;
     }
 
-    public async findAll(): Promise<Category[]>{
+    public async findAll(): Promise<Category[]> {
 
         const category = this.categories;
-        return category ;
+        return category;
     }
 
 

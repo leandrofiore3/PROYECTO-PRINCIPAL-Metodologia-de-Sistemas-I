@@ -1,4 +1,4 @@
-import {Visitor} from "../../domain/entities/visitor.entity";
+import Visitor from "../../domain/entities/visitor.entity";
 
 class VisitorRepository {
   private visitors: Visitor[];
