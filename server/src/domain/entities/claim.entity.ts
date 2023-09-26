@@ -25,5 +25,8 @@ class Claim {
     getId(): string {
         return this.id;
     }
+    static create(id: string, owner: Visitor, title: string, description: string, category: Category, location: string, createAt: Date, cloneOf: Claim | null): Claim {
+        return new Claim(id, owner, title, description, category, location, createAt, cloneOf);
+    }
 }
 export default Claim
