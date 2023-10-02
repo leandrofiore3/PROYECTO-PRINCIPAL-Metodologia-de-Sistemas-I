@@ -4,17 +4,17 @@ import CreateClaimHander from "../../application/handlers/CreateClainHander";
 
 class CreateClaimAction {
     public async run(req: Request, res: Response) {
-        const{id, owner, title, description, category, location, createAt, cloneOf} = req.body;
+        const{ owner, title, description, category, location, createAt, cloneOf} = req.body;
 
         try{
-            if (!id || !owner || !title || !description || !category || !location || !createAt) {
+            if ( !owner || !title || !description || !category || !location || !createAt) {
                 return res.status(400).json({ message: "All fields are required" });
             }
             
 
            
             const command = new CreateClaimCommand(
-                id,
+                
                 owner,
                 title,
                 description,
@@ -26,7 +26,7 @@ class CreateClaimAction {
             await CreateClaimHander.execute(command);
 
             return res.status(201).json(
-                {massage: "Claim created sucessfully"}
+                {message: "Claim created sucessfully"}
             );
         }catch(error) {
             const {message} = error as Error;
