@@ -9,7 +9,7 @@ class VisitorRoutes extends CommonRoutes {
   }
 
   public setUpRoutes(): Application {
-    this.app.post('/claim', createVisitorAction.run);
+    this.app.post('/visitor', createVisitorAction.run);
     
     return this.app;
   }
