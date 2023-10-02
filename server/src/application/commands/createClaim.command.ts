@@ -63,6 +63,14 @@ class CreateClaimCommand {
     public getCloneOf(): Claim | undefined {
         return this.cloneOf;
     }
+
+    public getOwnerId(): string {
+        return this.owner.getId();
+    }
+
+    public getVisitorPin(): string {
+        return this.owner.getPin();
+    }
 }
 
 export default CreateClaimCommand;
