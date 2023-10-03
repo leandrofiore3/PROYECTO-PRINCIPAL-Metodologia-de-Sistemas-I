@@ -1,3 +1,4 @@
+import {Request, Response} from 'express';
 import { DislikeCommand } from '../../commands/DislikeCommand.js';
 import ClaimRepository from '../../infrastructure/repositories/claim-repository.js'; // Asegúrate de importar el ClaimRepository desde el archivo adecuado.
 
@@ -9,14 +10,14 @@ class DislikeHandler {
   }
 
   public async execute(command: DislikeCommand): Promise<void> {
-    const claimId = command.getClaimId(); // Asegúrate de tener un método para obtener el ID del reclamo en la clase DislikeCommand.
+    const claimId = command.getClaimId();
     const claim = await this.claimRepository.findOneById(claimId);
 
     if (!claim) {
       throw new Error('Claim does not exist');
     }
 
-    claim.dislike(); // Supongo que la entidad Claim tiene un método dislike() para registrar un dislike en el reclamo.
+    claim.dislike(); 
 
     await this.claimRepository.save(claim);
   }
