@@ -4,15 +4,18 @@ import Claim from "../../domain/entities/claim.entity";
 class DislikeCommand {
   private readonly id: string;
   private readonly owner: Visitor;
+  private readonly pin: string;
   private dislikes: number;
 
   constructor(
     id: string,
     owner: Visitor,
+    pin:string,
 
   ) {
     this.id = id;
     this.owner = owner;
+    this.pin= pin;
     this.dislikes = 0;
   }
 
@@ -24,14 +27,13 @@ class DislikeCommand {
     return this.owner;
   }
 
-  
-  public getDislikes(): number {
-    return this.dislikes;
+  public getPin():string{
+    return this.pin;
   }
 
-  public dislike(): void {
-    this.dislikes++;
+  
+ 
   }
-}
+
 
 export default DislikeCommand;
