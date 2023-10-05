@@ -17,9 +17,6 @@ class DislikeAction {
       if (!claimId || !pin) {
         return res.status(400).json({ message: 'Claim ID and PIN are required' });
       }
-
-      // Aquí podrías agregar lógica adicional para autenticar al visitante si es necesario.
-
       const visitor = new Visitor(); 
       const command = new DislikeCommand(claimId, visitor, pin);
 
