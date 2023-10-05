@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { DislikeCommand } from "../../commands/DislikeCommand.js";
+import { DislikeCommand } from "../../application/commands/Di";
 import ClaimRepository from "../../infrastructure/repositories/claim-repository.js"; // Asegúrate de importar el ClaimRepository desde el archivo adecuado.
 import Visitor from "../../domain/entities/visitor.entity.js";
 class DislikeHandler {
