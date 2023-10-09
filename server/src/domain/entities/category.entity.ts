@@ -16,8 +16,5 @@ class Category {
     static create(id: string, name: string, color: string): Category {
         return new Category(id, name, color);
     }
-    static create(id: string, name: string, color: string): Category {
-        return new Category(id, name, color);
-    }
 }
 export default Category
