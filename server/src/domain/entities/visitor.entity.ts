@@ -1,4 +1,4 @@
- class Visitor {
+class Visitor {
     id: string;
     ip: string;
     nickname: string;
