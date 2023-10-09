@@ -1,6 +1,6 @@
 import Visitor from "../../domain/entities/visitor.entity";
 
-export class CreateLikeCommand {
+export class LikeCommand {
   private readonly id: string;
   private readonly owner: Visitor;
   private readonly pin: string;
