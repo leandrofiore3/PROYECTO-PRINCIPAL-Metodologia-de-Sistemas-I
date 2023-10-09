@@ -2,9 +2,9 @@ import Category from "../../domain/entities/category.entity";
 import CategoryRepository from "../../infrastructure/repositories/category.repository";
 
 class GetCategoriesCommand {
-    private categoryRepository: CategoryRepository;
+    private categoryRepository: typeof CategoryRepository;
 
-    constructor(categoryRepository: CategoryRepository) {
+    constructor(categoryRepository: typeof CategoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 

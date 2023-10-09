@@ -1,41 +1,36 @@
 import VisitorRepository from '../../infrastructure/repositories/visitor.repository';
 import CreateClaimCommand from '../commands/createClaim.command';
 import ClaimRepository from '../../infrastructure/repositories/claim-repository';
-import Visitor from '../../domain/entities/visitor.entity';
 import Claim from '../../domain/entities/claim.entity';
 
 class CreateClaimHandler {
-    private visitorRepository: VisitorRepository;
-    private claimRepository: ClaimRepository;
+    private visitorRepository: typeof VisitorRepository;
+    private claimRepository: typeof ClaimRepository;
 
     public constructor(
-        visitorRepository: VisitorRepository,
-        claimRepository: ClaimRepository
+        visitorRepository: typeof VisitorRepository,
+        claimRepository: typeof ClaimRepository
     ) {
         this.visitorRepository = visitorRepository;
         this.claimRepository = claimRepository;
     }
 
     public async execute(command: CreateClaimCommand): Promise<void> {
-        // Obtener el visitante por su ID
-        const owner = await this.visitorRepository.findOneById(
-            command.getOwner()
-        );
+        const owner = await this.visitorRepository.findOneById(command.getId());
 
         if (!owner) {
             throw new Error('Owner does not exist');
         }
 
-        // Validar el PIN del visitante
-        const isPinValid = this.validatePin(owner, command.getVisitorPin());
+        const isPinValid = this.validatePin(command.getVisitorPin());
 
         if (!isPinValid) {
             throw new Error('Visitor PIN is invalid');
         }
 
-        // Crear el reclamo
         const claim = Claim.create(
-            owner,
+            command.getId(),
+            command.getOwner(),
             command.getTitle(),
             command.getDescription(),
             command.getCategory(),
@@ -47,9 +42,9 @@ class CreateClaimHandler {
         await this.claimRepository.save(claim);
     }
 
-    private validatePin(visitor: Visitor, pin: string): boolean {
-        // Comparar el PIN proporcionado con el PIN almacenado en la entidad Visitor
-        return visitor.validatePin(pin);
+    private validatePin(pin: string): boolean {
+        const isValid = pin.length === 6 ? true : false;
+        return isValid;
     }
 }
 

@@ -1,23 +1,26 @@
 import { Request, Response } from 'express';
-import DislikeCommand from '../../application/commands/DislikeCommand'; 
-import DislikeHandler from '../../application/handlers/DislikeHandler'; 
-import Visitor from '../../domain/entities/visitor.entity'; 
+import DislikeCommand from '../../application/commands/DislikeCommand';
+import DislikeHandler from 'application/handlers/DislikeHandler';
+import visitorRepository from 'infrastructure/repositories/visitor.repository';
 
 class DislikeAction {
-  private readonly dislikeHandler: DislikeHandler;
+  private readonly dislikeHandler: typeof DislikeHandler;
 
-  constructor(dislikeHandler: DislikeHandler) {
+  constructor(dislikeHandler: typeof DislikeHandler) {
     this.dislikeHandler = dislikeHandler;
   }
 
   public async run(req: Request, res: Response) {
-    const { claimId, pin } = req.body; 
+    const { id, claimId, pin } = req.body;
 
     try {
       if (!claimId || !pin) {
         return res.status(400).json({ message: 'Claim ID and PIN are required' });
       }
-      const visitor = new Visitor(); 
+      const visitor = await visitorRepository.findOneById(id);
+      if (!visitor) {
+        return res.status(404).json({ message: "Visitor not found" });
+      }
       const command = new DislikeCommand(claimId, visitor, pin);
 
       await this.dislikeHandler.execute(command, visitor);

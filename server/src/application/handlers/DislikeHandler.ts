@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import { DislikeCommand } from "../../application/commands/Di";
-import ClaimRepository from "../../infrastructure/repositories/claim-repository.js"; // Asegúrate de importar el ClaimRepository desde el archivo adecuado.
+import DislikeCommand from "application/commands/DislikeCommand.js";
+import ClaimRepository from "../../infrastructure/repositories/claim-repository.js";
 import Visitor from "../../domain/entities/visitor.entity.js";
+
 class DislikeHandler {
   private claimRepository: typeof ClaimRepository;
 
@@ -13,13 +13,13 @@ class DislikeHandler {
     command: DislikeCommand,
     visitor: Visitor
   ): Promise<void> {
-    const claimId = command.getClaimId();
+    const claimId = command.getId();
     const claim = await this.claimRepository.findOneById(claimId);
 
     if (!claim) {
       throw new Error("Claim does not exist");
     }
-    const providedPin = command.getVisitorPin();
+    const providedPin = command.getPin();
     if (providedPin !== visitor.getPin()) {
       throw new Error("Invalid PIN");
     }

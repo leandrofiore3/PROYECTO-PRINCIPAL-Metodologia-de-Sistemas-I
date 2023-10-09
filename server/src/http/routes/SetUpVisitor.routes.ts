@@ -1,6 +1,6 @@
 import { Application } from 'express';
 import CommonRoutes from './common.routes';
-import createVisitorAction from '../actions/createClaimAction';
+import createVisitorAction from 'http/actions/createVisitorAction';
 
 
 class VisitorRoutes extends CommonRoutes {
@@ -10,7 +10,7 @@ class VisitorRoutes extends CommonRoutes {
 
   public setUpRoutes(): Application {
     this.app.post('/visitor', createVisitorAction.run);
-    
+
     return this.app;
   }
 }

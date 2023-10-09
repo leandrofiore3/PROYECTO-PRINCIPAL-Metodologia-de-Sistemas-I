@@ -21,6 +21,5 @@ class Visitor {
     getPin(): string {
         return this.pin;
     }
-
 }
 export default Visitor;

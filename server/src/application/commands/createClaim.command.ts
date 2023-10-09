@@ -10,7 +10,7 @@ class CreateClaimCommand {
     private readonly category: Category;
     private readonly location: string;
     private readonly createdAt: Date;
-    private readonly cloneOf?: Claim;
+    private readonly cloneOf: Claim | null;
 
     constructor(
         id: string,
@@ -20,7 +20,7 @@ class CreateClaimCommand {
         category: Category,
         location: string,
         createdAt: Date,
-        cloneOf?: Claim
+        cloneOf: Claim | null = null
     ) {
         this.id = id;
         this.owner = owner;
@@ -60,7 +60,7 @@ class CreateClaimCommand {
         return this.createdAt;
     }
 
-    public getCloneOf(): Claim | undefined {
+    public getCloneOf(): Claim | null {
         return this.cloneOf;
     }
 
