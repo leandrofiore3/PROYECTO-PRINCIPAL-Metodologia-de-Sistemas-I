@@ -1,7 +1,6 @@
 import { Application } from 'express';
 import CommonRoutes from './common.routes';
 import getCategoriesAction from 'http/actions/getCategories.action';
-// importar el getcategoriesaction
 
 class CategoriesRoutes extends CommonRoutes {
     public constructor(app: Application) {
