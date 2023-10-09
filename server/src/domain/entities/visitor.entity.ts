@@ -12,6 +12,9 @@ class Visitor {
     getId(): string {
         return this.id;
     }
+    static create(id: string, ip: string, nickname: string): Visitor {
+        return new Visitor(id, ip, nickname);
+    }
 }
 
 export default Visitor;
