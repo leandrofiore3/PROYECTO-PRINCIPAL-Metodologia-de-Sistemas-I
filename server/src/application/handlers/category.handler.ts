@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
-import GetCategoriesCommand from '../commands/getCategories.command';
-import Category from '../../domain/entities/category.entity';
+//import { Request, Response } from 'express';
+//import GetCategoriesCommand from '../commands/getCategories.command';
+//import Category from '../../domain/entities/category.entity';
 
 class CategoryHandler {
-  private getCategoriesCommand: GetCategoriesCommand;
+  /*private categoryRepository: GetCategoriesCommand;
 
   constructor(categoryRepository: CategoryRepository) {
     this.getCategoriesCommand = new GetCategoriesCommand(categoryRepository);
@@ -44,7 +44,7 @@ class CategoryHandler {
       console.error(error);
       res.status(500).json({ error: 'Error al guardar la categoría' });
     }
-  }
+  }*/
 }
 
 export default CategoryHandler;

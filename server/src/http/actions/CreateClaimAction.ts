@@ -7,7 +7,8 @@ class CreateClaimAction {
         const { owner, title, description, category, location, createAt, cloneOf } = req.body;
         try {
             if (!owner || !title || !description || !category || !location || !createAt) {
-                return res.status(400).json({ message: "All fields are required" });
+                res.status(400).json({ message: "All fields are required" });
+                return
             }
 
             const command = new CreateClaimCommand(
@@ -20,7 +21,7 @@ class CreateClaimAction {
             );
             await CreateClaimHandler.execute(command);
 
-            return res.status(201).json(
+            res.status(201).json(
                 { message: "Claim created sucessfully" }
             );
         } catch (error) {

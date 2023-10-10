@@ -1,3 +1,5 @@
+import { v4 } from 'uuid';
+
 class Category {
     id: string;
     name: string;
@@ -13,8 +15,8 @@ class Category {
         return this.id;
     }
 
-    static create(id: string, name: string, color: string): Category {
-        return new Category(id, name, color);
+    static create(name: string, color: string): Category {
+        return new Category(v4(), name, color);
     }
 }
 export default Category

@@ -1,3 +1,5 @@
+import { v4 } from 'uuid';
+
 class Visitor {
     id: string;
     ip: string;
@@ -14,8 +16,9 @@ class Visitor {
     getId(): string {
         return this.id;
     }
-    static create(id: string, ip: string, nickname: string, pin: string): Visitor {
-        return new Visitor(id, ip, nickname, pin);
+    
+    public static create(ip: string, nickname: string, pin: string): Visitor {
+        return new Visitor(v4(), ip, nickname, pin);
 
     }
     getPin(): string {

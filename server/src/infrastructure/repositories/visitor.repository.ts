@@ -22,4 +22,5 @@ class VisitorRepository {
 
 }
 
+export {VisitorRepository};
 export default new VisitorRepository();

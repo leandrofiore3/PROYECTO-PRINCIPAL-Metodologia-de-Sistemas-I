@@ -9,12 +9,13 @@ class LikeAction {
     try {
       const command = new LikeCommand(id, owner, pin);
       if (!id || !pin) {
-        return res.status(400).json({ message: 'Claim ID and PIN are required' });
+        res.status(400).json({ message: 'Claim ID and PIN are required' });
+        return
       }
 
       await LikeHandler.handler(command);
 
-      return res.status(200).json({ message: "Like added" });
+      res.status(200).json({ message: "Like added" });
     } catch (error) {
       const { message } = error as Error;
       res.status(400).json({ message: message });

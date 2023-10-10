@@ -4,21 +4,23 @@ import createVisitorHandler from 'application/handlers/createVisitorHandler';
 
 class createVisitorAction {
     public async run(req: Request, res: Response) {
-        const { ip, nickname } = req.body;
+        const { ip, nickname, pin } = req.body;
 
         try {
             if (!ip || !nickname) {
-                return res.status(400).json({ message: "All fields are required" });
+                res.status(400).json({ message: "All fields are required" });
+                return
             }
 
             const command = new CreateVisitorCommand(
                 ip,
-                nickname
+                nickname,
+                pin
             );
 
             await createVisitorHandler.execute(command);
 
-            return res.status(201).json(
+            res.status(201).json(
                 { message: 'Visitor create sucessfully' }
             );
         } catch (error) {

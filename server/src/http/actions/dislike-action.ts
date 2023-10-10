@@ -15,17 +15,19 @@ class DislikeAction {
 
     try {
       if (!claimId || !pin) {
-        return res.status(400).json({ message: 'Claim ID and PIN are required' });
+        res.status(400).json({ message: 'Claim ID and PIN are required' });
+        return
       }
       const visitor = await visitorRepository.findOneById(id);
       if (!visitor) {
-        return res.status(404).json({ message: "Visitor not found" });
+       res.status(404).json({ message: "Visitor not found" });
+       return
       }
       const command = new DislikeCommand(claimId, visitor, pin);
 
       await this.dislikeHandler.execute(command, visitor);
 
-      return res.status(200).json({ message: 'Disliked successfully' });
+      res.status(200).json({ message: 'Disliked successfully' });
     } catch (error) {
       const { message } = error as Error;
       res.status(400).json({ message });

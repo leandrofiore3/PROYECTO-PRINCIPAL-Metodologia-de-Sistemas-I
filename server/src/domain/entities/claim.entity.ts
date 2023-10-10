@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 import Visitor from "./visitor.entity.js";
 import Category from "./category.entity.js";
 
@@ -43,8 +44,8 @@ class Claim {
   getId(): string {
     return this.id;
   }
-  static create(id: string, owner: Visitor, title: string, description: string, category: Category, location: string, createAt: Date, cloneOf: Claim | null): Claim {
-    return new Claim(id, owner, title, description, category, location, createAt, cloneOf);
+  static create(owner: Visitor, title: string, description: string, category: Category, location: string, createAt: Date, cloneOf: Claim | null): Claim {
+    return new Claim(v4(), owner, title, description, category, location, createAt, cloneOf);
   }
 }
-export default Claim
+export default Claim;

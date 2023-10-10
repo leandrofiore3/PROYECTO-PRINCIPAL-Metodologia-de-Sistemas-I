@@ -29,7 +29,6 @@ class CreateClaimHandler {
         }
 
         const claim = Claim.create(
-            command.getId(),
             command.getOwner(),
             command.getTitle(),
             command.getDescription(),
