@@ -19,4 +19,5 @@ class Category {
         return new Category(v4(), name, color);
     }
 }
-export default Category
+
+export default Category;

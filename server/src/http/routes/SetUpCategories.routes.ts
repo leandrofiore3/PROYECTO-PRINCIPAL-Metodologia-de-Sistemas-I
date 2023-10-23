@@ -10,7 +10,6 @@ class CategoriesRoutes extends CommonRoutes {
     public setUpRoutes(): Application {
         this.app.get('/categories', getCategoriesAction.run);
 
-
         return this.app;
     }
 }

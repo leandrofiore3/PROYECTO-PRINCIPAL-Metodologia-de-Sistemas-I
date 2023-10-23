@@ -1,50 +1,43 @@
-//import { Request, Response } from 'express';
-//import GetCategoriesCommand from '../commands/getCategories.command';
-//import Category from '../../domain/entities/category.entity';
+import Category from 'domain/entities/category.entity';
+import { Request, Response } from 'express';
+import CategoryRepository from 'infrastructure/repositories/category.repository';
 
 class CategoryHandler {
-  /*private categoryRepository: GetCategoriesCommand;
+  public static listCategories(req: Request, res: Response) {
+    const categories = CategoryRepository.findAll();
 
-  constructor(categoryRepository: CategoryRepository) {
-    this.getCategoriesCommand = new GetCategoriesCommand(categoryRepository);
+    res.json(categories);
   }
 
-  async getAllCategories(req: Request, res: Response): Promise<void> {
-    try {
-      const categories = await this.getCategoriesCommand.getAllCategories();
-      res.status(200).json(categories);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error al obtener las categorías' });
+  public static getCategoryById(req: Request, res: Response) {
+    const { categoryId } = req.params;
+
+    if (!categoryId) {
+      return res.status(401).send("Categoría no enviada");
     }
+
+    const category = CategoryRepository.findOneById(categoryId);
+
+    if (!category) {
+      return res.status(404).json({ message: 'Categoría no encontrada' });
+    }
+
+    res.status(200).json(category);
   }
 
-  async getCategoryById(req: Request, res: Response): Promise<void> {
-    try {
-      const categoryId = req.params.categoryId;
-      const category = await this.getCategoriesCommand.getCategoryById(categoryId);
+  public static async createCategory(req: Request, res: Response) {
+    const { name, color } = req.body;
 
-      if (category) {
-        res.status(200).json(category);
-      } else {
-        res.status(404).json({ error: 'Categoría no encontrada' });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error al obtener la categoría' });
+    if (!name || !color) {
+      return res.status(400).json({ message: 'Nombre y color son campos obligatorios' });
     }
+
+    const newCategory = Category.create(name, color);
+
+    await CategoryRepository.save(newCategory);
+
+    res.status(201).json(newCategory);
   }
-
-  async saveCategory(req: Request, res: Response): Promise<void> {
-    try {
-      const newCategory = req.body as Category;
-      await this.getCategoriesCommand.saveCategory(newCategory);
-      res.status(201).json({ message: 'Categoría guardada con éxito' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error al guardar la categoría' });
-    }
-  }*/
 }
 
 export default CategoryHandler;
