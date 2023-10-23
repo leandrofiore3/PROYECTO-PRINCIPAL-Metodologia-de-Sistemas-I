@@ -20,7 +20,12 @@ class VisitorRepository {
     return (visitor) ? visitor : null;
   }
 
+  async findAll(): Promise<Visitor[]> {
+    const visitors = this.visitors;
+    return visitors;
+  }
+
 }
 
-export {VisitorRepository};
+export { VisitorRepository };
 export default new VisitorRepository();

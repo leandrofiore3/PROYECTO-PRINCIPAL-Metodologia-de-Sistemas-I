@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
-import CreateClaimCommand from "application/commands/createClaim.command";
-import CreateClaimHandler from "application/handlers/createClaim.handler";
+import CreateClaimCommand from "../../application/commands/createClaim.command";
+import CreateClaimHandler from "../../application/handlers/createClaim.handler";
 
 class CreateClaimAction {
     public async run(req: Request, res: Response) {
-        const { owner, title, description, category, location, createAt, cloneOf } = req.body;
+        const { owner, title, description, category, location, createdAt, cloneOf } = req.body;
         try {
-            if (!owner || !title || !description || !category || !location || !createAt) {
+            console.log(req.body);
+            if (!owner || !title || !description || !category || !location || !createdAt) {
                 res.status(400).json({ message: "All fields are required" });
                 return
             }
@@ -16,7 +17,8 @@ class CreateClaimAction {
                 title,
                 description,
                 category,
-                location, createAt,
+                location,
+                createdAt,
                 cloneOf
             );
             await CreateClaimHandler.execute(command);

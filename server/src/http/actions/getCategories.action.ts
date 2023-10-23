@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import categoryRepository from 'infrastructure/repositories/category.repository';
+import categoryRepository from '../../infrastructure/repositories/category.repository';
+
 class GetCategoriesAction {
     public async run(_req: Request, res: Response) {
         try {
@@ -14,13 +15,3 @@ class GetCategoriesAction {
     }
 }
 export default new GetCategoriesAction();
-
-
-
-
-
-
-
-
-
-

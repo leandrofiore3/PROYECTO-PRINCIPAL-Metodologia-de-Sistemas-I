@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import CreateVisitorCommand from 'application/commands/createVisitorCommand';
-import createVisitorHandler from 'application/handlers/createVisitorHandler';
+import CreateVisitorCommand from '../../application/commands/createVisitorCommand';
+import CreateVisitorHandler from '../../application/handlers/createVisitorHandler';
 
 class createVisitorAction {
     public async run(req: Request, res: Response) {
@@ -18,7 +18,7 @@ class createVisitorAction {
                 pin
             );
 
-            await createVisitorHandler.execute(command);
+            await CreateVisitorHandler.execute(command);
 
             res.status(201).json(
                 { message: 'Visitor create sucessfully' }

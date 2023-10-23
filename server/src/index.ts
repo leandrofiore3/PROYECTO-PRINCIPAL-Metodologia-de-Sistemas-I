@@ -4,6 +4,10 @@ import cors from 'cors';
 import { log } from 'debug';
 import expressWinston from 'express-winston';
 import winston from 'winston';
+import CategoriesRoutes from './http/routes/SetUpCategories.routes';
+import SeederCategory from './infrastructure/seeders/seeder.category';
+import VisitorRoutes from './http/routes/SetUpVisitor.routes';
+import ClaimRoutes from './http/routes/SepUpClaim.routes';
 
 const app: express.Application = express();
 
@@ -27,12 +31,12 @@ const routes: Array<CommonRoutes> = [];
 app.use(cors());
 app.use(express.json());
 
-// Add router
-// you should add your routes here...
-//routes.push(new PassengerRoutes(app));
+routes.push(new CategoriesRoutes(app));
+routes.push(new VisitorRoutes(app));
+routes.push(new ClaimRoutes(app));
 
-
-app.listen(3000, () => {
+app.listen(3000, async () => {
+  await SeederCategory.generate();
   routes.forEach((route: CommonRoutes) => {
     log(`Routes configured for ${route.getName()}`);
   });
