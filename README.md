@@ -1,5 +1,17 @@
+# Proyecto Metodología de Sistemas I 💻
 
-### Pasos de instalacion
+## Pasos para levantar el proyecto localmente 🚀
+1. Clonar localmente el proyecto con `https://github.com/leandrofiore3/PROYECTO-PRINCIPAL-Metodologia-de-Sistemas-I.git`
+
+2. Entrar a la carpeta del proyecto con `cd PROYECTO-PRINCIPAL-Metodologia-de-Sistemas-I/` 
+
+3. Instalar las dependencias con el comando `npm i`
+
+4. Una vez instaladas las dependencias, ejecutar el comando `npm run dev` para levantar el puerto `3000`
+
+Listo, ya podes disfrutar del proyecto. Una vez que lo tengas levantado localmente, podes probar los endpoints con [colección de Postman](https://documenter.getpostman.com/view/21179839/2s9YRCXrYh)
+
+### Docker 🐳
 
 Instalar [docker](https://docs.docker.com/engine/install/)
 
