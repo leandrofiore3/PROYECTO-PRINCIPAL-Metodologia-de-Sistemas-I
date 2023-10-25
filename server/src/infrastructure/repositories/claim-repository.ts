@@ -16,6 +16,10 @@ class ClaimRepository {
         const claim = this.claims.find(a => a.getId() === id);
         return claim ? claim : null;
     }
+    public async findLast5Claims(): Promise<Claim[]> {       
+        this.claims.sort((a, b) => b.createAt.getTime() - a.createAt.getTime());
+        return this.claims.slice(0, 5);
+    }
 
 }
 export default new ClaimRepository();
