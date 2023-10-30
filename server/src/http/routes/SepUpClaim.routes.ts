@@ -14,8 +14,6 @@ class ClaimRoutes extends CommonRoutes {
     this.app.put('/like', likeAction.run);
     this.app.get('/last-claims', getLastClaimsAction.run);
     
-    
-
     return this.app;
   }
 }
