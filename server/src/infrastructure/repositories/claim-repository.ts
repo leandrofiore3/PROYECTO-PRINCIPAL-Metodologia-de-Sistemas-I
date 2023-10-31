@@ -17,5 +17,13 @@ class ClaimRepository {
         return claim ? claim : null;
     }
 
+    public async findLastClaimsByVisitorId(id:string){
+        const filterClaims = this.claims.filter((claims) => claims.getId() === id);
+        filterClaims.sort((a, b) => b.createAt.getTime() - a.createAt.getTime());    
+        const LastClaims = filterClaims.slice(0, 5); 
+
+        return LastClaims
+    } 
+    
 }
 export default new ClaimRepository();
