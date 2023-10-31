@@ -20,19 +20,15 @@ class CategoryReporitory {
     }
 
     public async findOneById(id: string): Promise<Category | null> {
-
         const category = this.categories.find(a => a.getId() === id);
 
         return category ? category : null;
     }
 
     public async findAll(): Promise<Category[]> {
-
         const category = this.categories;
         return category;
     }
-
-
 }
 
 export default new CategoryReporitory();

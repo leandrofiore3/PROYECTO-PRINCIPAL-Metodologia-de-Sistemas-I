@@ -1,16 +1,13 @@
-import Visitor from "../../domain/entities/visitor.entity";
-
 export class LikeCommand {
-  private readonly id: string;
-  private readonly owner: Visitor;
-  private readonly pin: string;
+    private readonly id: string;
+    private readonly owner: string;
+    private readonly pin: string;
 
     constructor(
         id: string,
-        owner: Visitor,
+        owner: string,
         pin: string
-    ) 
-    {
+    ) {
         this.id = id;
         this.owner = owner;
         this.pin = pin;
@@ -20,7 +17,7 @@ export class LikeCommand {
         return this.id;
     }
 
-    public getOwner(): Visitor {
+    public getOwner(): string {
         return this.owner;
     }
 

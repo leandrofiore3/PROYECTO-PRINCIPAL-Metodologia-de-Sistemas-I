@@ -13,10 +13,10 @@ class Visitor {
         this.pin = pin;
     }
 
-    getId(): string {
+    public getId(): string {
         return this.id;
     }
-    
+
     public static create(ip: string, nickname: string, pin: string): Visitor {
         return new Visitor(v4(), ip, nickname, pin);
 

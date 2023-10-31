@@ -13,8 +13,8 @@ class LikeHandler {
     const owner = command.getOwner();
     const pin = command.getPin();
 
+    const visitor = await this.visitorRepository.findOneById(owner);
 
-    const visitor = await this.visitorRepository.findOneById(owner.getId());
     if (!visitor) {
       throw new Error('Visitor not found');
     }
@@ -24,7 +24,8 @@ class LikeHandler {
       throw new Error('Claim not found');
     }
 
-    if (owner.getPin() !== pin) {
+    // hacer un metodo para validar el pin
+    if (visitor.pin !== pin) {
       throw new Error('Invalid PIN');
     }
 

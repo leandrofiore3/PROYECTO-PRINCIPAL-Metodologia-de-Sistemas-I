@@ -7,7 +7,9 @@ import winston from 'winston';
 import CategoriesRoutes from './http/routes/SetUpCategories.routes';
 import SeederCategory from './infrastructure/seeders/seeder.category';
 import VisitorRoutes from './http/routes/SetUpVisitor.routes';
-import ClaimRoutes from './http/routes/SepUpClaim.routes';
+import ClaimRoutes from './http/routes/SetUpClaim.routes';
+import SeederVisitor from './infrastructure/seeders/seeder.visitor';
+import SeederClaim from './infrastructure/seeders/seeder.claim';
 
 const app: express.Application = express();
 
@@ -37,6 +39,8 @@ routes.push(new ClaimRoutes(app));
 
 app.listen(3000, async () => {
   await SeederCategory.generate();
+  await SeederVisitor.generate();
+  await SeederClaim.generate();
   routes.forEach((route: CommonRoutes) => {
     log(`Routes configured for ${route.getName()}`);
   });
