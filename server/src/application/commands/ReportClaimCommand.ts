@@ -1,23 +1,29 @@
-#!/usr/bin/env node
-import commander from 'commander';
-import { Command } from 'commander';
+import Visitor from 'domain/entities/visitor.entity';
+import Category from 'domain/entities/category.entity';
 
-//const program = new Command();
-//program 
-//.option('-p, --port <port>', 'Specify the port')
-//.parse(process.argv);
+class ReportClaimCommand {
+  constructor(
+    private owner: Visitor,
+    private description: string,
+    private category: Category,
+    private createdAt: Date
+  ) {}
 
-//console.log('Port: ${program.port}');
+  public getOwner(): Visitor {
+    return this.owner;
+  }
 
-new commander
-    .Command('report-claim')//NO EXISTE EN LA IMPORTACION  ????
-  .description('Generates a report for a claim')
-  .option('-t, --type <type>', 'Specify the type of claim')
-  .action((options: { type: string; }) => {
-    const claimType = options.type || 'default';
-    
-    // genera informa
-    console.log(`Generating report for claim type: ${claimType}`);
-  });
+  public getDescription(): string {
+    return this.description;
+  }
 
-commander.parse(process.argv); 
+  public getCategory(): Category {
+    return this.category;
+  }
+
+  public getCreatedAt(): Date {
+    return this.createdAt;
+  }
+}
+
+export default ReportClaimCommand;
