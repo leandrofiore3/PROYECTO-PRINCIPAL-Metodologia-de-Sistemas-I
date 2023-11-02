@@ -2,7 +2,7 @@ import VisitorRepository from "../../infrastructure/repositories/visitor.reposit
 import ClaimRepository from "../../infrastructure/repositories/claim-repository";
 import { LikeCommand } from "../commands/like.command";
 
-class LikeHandler {
+export class LikeHandler {
   constructor(
     private readonly claimRepository: typeof ClaimRepository,
     private readonly visitorRepository: typeof VisitorRepository
@@ -29,7 +29,7 @@ class LikeHandler {
       throw new Error('Invalid PIN');
     }
 
-    claim.like();
+    claim.like(owner);
 
     await this.claimRepository.save(claim);
   }
