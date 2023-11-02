@@ -1,6 +1,6 @@
 import Claim from "../../domain/entities/claim.entity";
 
-class ClaimRepository {
+export class ClaimRepository {
     private claims: Claim[];
     public constructor() {
         this.claims = [];
