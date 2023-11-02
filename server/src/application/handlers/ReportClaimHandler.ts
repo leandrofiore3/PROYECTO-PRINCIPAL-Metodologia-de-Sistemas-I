@@ -10,10 +10,11 @@ class ReportClaimHandler {
     this.ReportClaimAction = reportClaimAction;
   }
 
-  public async findOriginalAndDuplicateClaim(
+  public async findOriginalAndDuplicateClaim( //METODO
     owner: Visitor,
     description: string,
     category: Category
+
   ): Promise<void> {
     const [originalClaim, duplicateClaim] = await Promise.all([
       this.ReportClaimAction.findOriginalClaim(owner, description, category),
@@ -21,10 +22,10 @@ class ReportClaimHandler {
     ]);
 
       if (!originalClaim || !duplicateClaim || originalClaim.createdAt <= duplicateClaim.createdAt) {
-        throw new Error('No se encontraron los informes originales/duplicados, o el claim original es más reciente que el que el duplicado.');
+        throw new Error('No se encontraron los informes originales/duplicados, o el claim original es más reciente que el duplicado.');
     }
 
-        duplicateClaim.close();
+        duplicateClaim.close();//CIERRA EL DUPLICADO
 
     await Promise.all([
       this.ReportClaimAction.save(originalClaim),
@@ -32,10 +33,5 @@ class ReportClaimHandler {
     ]);
   }
 }
-
 export default new ReportClaimHandler(ReportClaimAction);
-
-
-
-//nombre descripcion category
-//crear el claim original y el duplicado y pasarlo por parametro
+//ESTA HERMOSO
