@@ -13,12 +13,13 @@ class ReportClaimHandler {
   public async findOriginalAndDuplicateClaim( //METODO
     owner: Visitor,
     description: string,
-    category: Category
+    category: Category,
+    createdAt: Date
 
   ): Promise<void> {
     const [originalClaim, duplicateClaim] = await Promise.all([
-      this.ReportClaimAction.findOriginalClaim(owner, description, category),
-      this.ReportClaimAction.findDuplicateClaim(owner, description, category),
+      this.ReportClaimAction.findOriginalClaim(owner, description, category, createdAt),
+      this.ReportClaimAction.findDuplicateClaim(owner, description, category, createdAt),
     ]);
 
       if (!originalClaim || !duplicateClaim || originalClaim.createdAt <= duplicateClaim.createdAt) {
