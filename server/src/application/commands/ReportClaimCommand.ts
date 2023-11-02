@@ -1,5 +1,5 @@
-import Visitor from 'domain/entities/visitor.entity';
-import Category from 'domain/entities/category.entity';
+import Visitor from "../../domain/entities/visitor.entity";
+import Category from "../../domain/entities/category.entity";
 
 class ReportClaimCommand {
   constructor(
