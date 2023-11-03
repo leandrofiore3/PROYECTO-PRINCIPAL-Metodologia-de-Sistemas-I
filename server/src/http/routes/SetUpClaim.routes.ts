@@ -2,7 +2,6 @@ import { Application } from 'express';
 import CommonRoutes from './common.routes';
 import CreateClaimAction from '../actions/CreateClaimAction';
 import likeAction from '../actions/like.action';
-import getLastFiveAction from '../../http/actions/getLastFive.action';
 
 class ClaimRoutes extends CommonRoutes {
   public constructor(app: Application) {
@@ -12,7 +11,6 @@ class ClaimRoutes extends CommonRoutes {
   public setUpRoutes(): Application {
     this.app.post('/claim', CreateClaimAction.run);
     this.app.put('/like', likeAction.run)
-    this.app.get('/fiveOnFire', getLastFiveAction.run);
 
     return this.app;
   }
