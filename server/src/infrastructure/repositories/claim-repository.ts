@@ -5,6 +5,7 @@ class ClaimRepository {
   public constructor() {
     this.claims = [];
   }
+
   public async save(claim: Claim): Promise<void> {
     const saveClaim = this.claims.find((a) => a.getId() === claim.getId());
     if (saveClaim) {
@@ -12,10 +13,12 @@ class ClaimRepository {
     }
     this.claims.push(claim);
   }
+
   public async findOneById(id: string): Promise<Claim | null> {
     const claim = this.claims.find((a) => a.getId() === id);
     return claim ? claim : null;
   }
+
   public async findLast5Claims(): Promise<Claim[]> {
     const sortedClaims = this.claims.sort((a, b) => {
       return b.createAt.getTime() - a.createAt.getTime();
