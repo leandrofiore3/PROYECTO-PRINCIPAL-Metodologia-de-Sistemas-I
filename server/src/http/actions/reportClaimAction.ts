@@ -1,35 +1,42 @@
-//import { Request, Response } from "express";
+import { Request, Response} from "express";
 import ReportClaimHandler from "../../application/handlers/ReportClaimHandler";
-import Claim from "domain/entities/claim.entity";
+import ReportClaimCommand from "../../application/commands/ReportClaimCommand";
+
+
+
 
 class ReportClaimAction{
+  constructor(
+    private handler: ReportClaimHandler,
+  ) {
+  }
+
+  public async run(req: Request, res: Response): Promise<void> {
+    const {id} = req.params;
+    const {originalId} = req.body;
+
+    if (!originalId || !id) {
+      res.status(400).json({message: 'originalId is required'});
+      return;
+    }
+
+    try {
+      const command = new ReportClaimCommand(id, originalId);
+
+      await this.handler.handle(command);
+
+      res.status(200).json({message: 'claim reported'});
+
+    } catch (e: any) {
+      res.status(400).json({message: e.message})
+    }
+
+
+  }
+
+
     
-    public static async reportDuplicateClaims(claimId1: string, claimId2: string) {
-  
-      const claim1 = ReportClaimHandler.getClaimById(claimId1);
-      const claim2 = ReportClaimHandler.getClaimById(claimId2);
-  
-      if (claim1 && claim2) {
-        
-        const ClaimsDuplicate = ReportClaimAction.compareClaimsByContent(claim1, claim2);
-  
-        if (ClaimsDuplicate) {
-          // Implementa la lógica para tomar medidas si los reclamos son duplicados
-          // Marcar uno de los reclamos como duplicado en tu base de datos
-          ReportClaimHandler.markClaimAsDuplicate(claim1);
-        }
-  
-        return ClaimsDuplicate;
-      }
-  
-      return false; // No se pudieron encontrar los reclamos
-    }
-  
-    private static compareClaimsByContent(claim1: Claim, claim2: Claim): boolean {
-      // Implementa la lógica para comparar los reclamos por el campo "contenido"
-      return claim1.content === claim2.content;//agregue content en Claim.entity
-    }
-  }export default new ReportClaimAction();
+  }export default new ReportClaimAction(ReportClaimHandler);
   
   
   
