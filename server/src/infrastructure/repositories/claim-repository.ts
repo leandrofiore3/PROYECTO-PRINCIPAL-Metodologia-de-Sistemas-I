@@ -23,8 +23,31 @@ class ClaimRepository {
     const sortedClaims = this.claims.sort((a, b) => {
       return b.createAt.getTime() - a.createAt.getTime();
     });
+
     const last5Claims = sortedClaims.slice(0, 5);
     return last5Claims;
   }
+
+  public async lastFiveOnFireInLastHour(): Promise<Claim[]> {
+    const now = new Date();
+    const oneHourAgo = new Date(now);
+    oneHourAgo.setHours(now.getHours() - 1);
+
+    const claimsInLastHour = this.claims.filter((claim) => claim.createAt > oneHourAgo);
+
+    claimsInLastHour.sort((a, b) => b.getLikes() - a.getLikes());
+
+    return claimsInLastHour.slice(0, 5);
+  }
+
+  public async findLastClaimsByVisitorId(visitorId: string) {
+    const visitorClaims = this.claims.filter((a) => {
+      return a.owner.getId() === visitorId;
+    });
+
+    return visitorClaims;
+  }
 }
+
+export { ClaimRepository };
 export default new ClaimRepository();

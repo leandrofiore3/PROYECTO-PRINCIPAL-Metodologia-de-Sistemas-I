@@ -1,19 +1,21 @@
 import { Request, Response } from 'express';
 import claimsRepository from '../../infrastructure/repositories/claim-repository';
-//import visitorRepository from 'infrastructure/repositories/visitor.repository';
 
 class GetLastVisitorClaimsAction {
     public async run(req: Request, res: Response) {
-        const {id} = req.body;
+        const { id } = req.body;
         try {
+            const lastVisitorClaims = await claimsRepository.findLastClaimsByVisitorId(id);
 
-            const LastVisitorClaims = await claimsRepository.findLastClaimsByVisitorId(id);
+            if (lastVisitorClaims.length === 0) {
+                return res.status(404).send("No hay claims presentados por este usuario");
+            };
 
-            res.status(200).json(LastVisitorClaims);
+            return res.status(200).json(lastVisitorClaims);
         } catch (error) {
-
-            res.status(500).json({ error: 'Error al obtener los ultimos claims.' });
+            return res.status(500).json({ error: 'Error al obtener los ultimos claims.' });
         }
     }
 }
+
 export default new GetLastVisitorClaimsAction();
