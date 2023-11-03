@@ -19,6 +19,7 @@ class ClaimRepository {
     const claim = this.claims.find((a) => a.getId() === id);
     return claim ? claim : null;
   }
+
   public async findLastClaimsByVisitorId(id: string) {
     const filterClaims = this.claims.filter((claims) => claims.getId() === id);
     filterClaims.sort((a, b) => b.createAt.getTime() - a.createAt.getTime());
