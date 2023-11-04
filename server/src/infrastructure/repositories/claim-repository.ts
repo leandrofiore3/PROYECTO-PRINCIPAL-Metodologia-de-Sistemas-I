@@ -47,6 +47,11 @@ class ClaimRepository {
 
     return visitorClaims;
   }
+
+  
+  public async findReportedClaims(): Promise<Claim[]> {
+    return this.claims.filter((claim) => claim.isReported());
+  }
 }
 
 export { ClaimRepository };

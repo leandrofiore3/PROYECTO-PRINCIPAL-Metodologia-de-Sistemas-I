@@ -1,38 +1,42 @@
-import Visitor from 'domain/entities/visitor.entity';
-import Claim from '../../domain/entities/claim.entity'; 
-import ReportClaimAction from '../../http/actions/ReportClaimAction'; 
-import Category from 'domain/entities/category.entity';
+import ReportClaimCommand from 'application/commands/ReportClaimCommand';
+import ClaimRepository from '../../infrastructure/repositories/claim-repository';
+import VisitorRepository from '../../infrastructure/repositories/visitor.repository';
 
 class ReportClaimHandler {
-  private ReportClaimAction: typeof ReportClaimAction;
+  private claimRepository: typeof ClaimRepository;
+  private visitorRepository: typeof VisitorRepository;
 
-  constructor(reportClaimAction: typeof ReportClaimAction) {
-    this.ReportClaimAction = reportClaimAction;
+  public constructor(claimRepository: typeof ClaimRepository, visitorRepository: typeof VisitorRepository) {
+    this.claimRepository = claimRepository;
+    this.visitorRepository = visitorRepository;
   }
 
-  public async findOriginalAndDuplicateClaim( //METODO
-    owner: Visitor,
-    description: string,
-    category: Category,
-    createdAt: Date
+  public async handle(command: ReportClaimCommand): Promise<void> {
+    const claimId = command.getClaimId();
 
-  ): Promise<void> {
-    const [originalClaim, duplicateClaim] = await Promise.all([
-      this.ReportClaimAction.findOriginalClaim(owner, description, category, createdAt),
-      this.ReportClaimAction.findDuplicateClaim(owner, description, category, createdAt),
-    ]);
+    const claim = await this.claimRepository.findOneById(claimId);
 
-      if (!originalClaim || !duplicateClaim || originalClaim.createdAt <= duplicateClaim.createdAt) {
-        throw new Error('No se encontraron los informes originales/duplicados, o el claim original es más reciente que el duplicado.');
+    if (!claim) {
+      throw new Error('Claim does not exist');
     }
 
-        duplicateClaim.close();//CIERRA EL DUPLICADO
+    if (claim.isReported()) {
+      throw new Error('Claim has already been reported.');
+    }
 
-    await Promise.all([
-      this.ReportClaimAction.save(originalClaim),
-      this.ReportClaimAction.save(duplicateClaim),
-    ]);
+    // Obtener el usuario que realiza la denuncia 
+    const reportedBy = await this.visitorRepository.findOneById('visitorId'); // Reemplazar 'userId' 
+
+    if (!reportedBy) {
+      throw new Error('Reporting user does not exist');
+    }
+
+    // Marcar el reclamo como reportado
+    //claim.markAsReported(reportedBy, new Date());
+    claim.markAsReported();
+
+    await this.claimRepository.save(claim);
   }
 }
-export default new ReportClaimHandler(ReportClaimAction);
-//ESTA HERMOSO
+
+export default new ReportClaimHandler(ClaimRepository, VisitorRepository);
