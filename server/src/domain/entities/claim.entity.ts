@@ -1,4 +1,4 @@
-import {v4} from 'uuid';
+import { v4 } from 'uuid';
 import Visitor from "./visitor.entity.js";
 import Category from "./category.entity.js";
 
@@ -57,7 +57,15 @@ class Claim {
   public getClaimId(): string {
     return this.id;
   }
-
+  public isReported(): boolean {
+    return this.reported;
+  }
+  //public markAsReported(reportedBy: Visitor, reportedAt: Date): void {
+  public markAsReported(): void {
+    this.reported = true;
+    // this.reportedBy = reportedBy;
+    //this.reportedAt = reportedAt;
+  }
   getId(): string {
     return this.id;
   }

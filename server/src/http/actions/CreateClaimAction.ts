@@ -8,8 +8,7 @@ class CreateClaimAction {
         try {
             console.log(req.body);
             if (!owner || !title || !description || !category || !location || !createdAt) {
-                res.status(400).json({ message: "All fields are required" });
-                return
+                return res.status(400).json({ message: "All fields are required" });
             }
 
             const command = new CreateClaimCommand(
@@ -23,12 +22,12 @@ class CreateClaimAction {
             );
             await CreateClaimHandler.execute(command);
 
-            res.status(201).json(
+            return res.status(201).json(
                 { message: "Claim created sucessfully" }
             );
         } catch (error) {
             const { message } = error as Error;
-            res.status(400).json(
+            return res.status(400).json(
                 { message: message }
             );
         }
