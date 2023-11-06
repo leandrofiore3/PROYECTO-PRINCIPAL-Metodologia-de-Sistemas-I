@@ -7,7 +7,7 @@ class ClaimRepository {
   }
 
   public async save(claim: Claim): Promise<void> {
-    const saveClaim = this.claims.find((a) => a.getId() === claim.getId());
+    const saveClaim = this.claims.find((a) => { a.getId() === claim.getId() });
     if (saveClaim) {
       this.claims.splice(this.claims.indexOf(saveClaim), 1);
     }
@@ -48,11 +48,10 @@ class ClaimRepository {
     return visitorClaims;
   }
 
-  
+
   public async findReportedClaims(): Promise<Claim[]> {
     return this.claims.filter((claim) => claim.isReported());
   }
 }
 
-export { ClaimRepository };
 export default new ClaimRepository();

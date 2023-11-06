@@ -51,9 +51,9 @@ class Claim {
     return this.reported;
   }
   //public markAsReported(reportedBy: Visitor, reportedAt: Date): void {
-    public markAsReported(): void {
+  public markAsReported(): void {
     this.reported = true;
-    //this.reportedBy = reportedBy;
+    // this.reportedBy = reportedBy;
     //this.reportedAt = reportedAt;
   }
   getId(): string {

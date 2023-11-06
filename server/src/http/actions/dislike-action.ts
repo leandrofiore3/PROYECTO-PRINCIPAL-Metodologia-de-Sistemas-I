@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import DislikeCommand from '../../application/commands/DislikeCommand';
-import DislikeHandler from 'application/handlers/DislikeHandler';
-import visitorRepository from 'infrastructure/repositories/visitor.repository';
+import DislikeHandler from '../../application/handlers/DislikeHandler';
+import visitorRepository from '../../infrastructure/repositories/visitor.repository';
 
 class DislikeAction {
   private readonly dislikeHandler: typeof DislikeHandler;
@@ -20,8 +20,8 @@ class DislikeAction {
       }
       const visitor = await visitorRepository.findOneById(id);
       if (!visitor) {
-       res.status(404).json({ message: "Visitor not found" });
-       return
+        res.status(404).json({ message: "Visitor not found" });
+        return
       }
       const command = new DislikeCommand(claimId, visitor, pin);
 

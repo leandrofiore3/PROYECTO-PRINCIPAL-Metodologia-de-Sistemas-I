@@ -1,9 +1,9 @@
-import Category from 'domain/entities/category.entity';
+import Category from '../../domain/entities/category.entity';
 import { Request, Response } from 'express';
-import CategoryRepository from 'infrastructure/repositories/category.repository';
+import CategoryRepository from '../../infrastructure/repositories/category.repository';
 
 class CategoryHandler {
-  public static listCategories(req: Request, res: Response) {
+  public static listCategories(res: Response) {
     const categories = CategoryRepository.findAll();
 
     res.json(categories);
@@ -22,7 +22,7 @@ class CategoryHandler {
       return res.status(404).json({ message: 'Categoría no encontrada' });
     }
 
-    res.status(200).json(category);
+    return res.status(200).json(category);
   }
 
   public static async createCategory(req: Request, res: Response) {
@@ -36,7 +36,7 @@ class CategoryHandler {
 
     await CategoryRepository.save(newCategory);
 
-    res.status(201).json(newCategory);
+    return res.status(201).json(newCategory);
   }
 }
 

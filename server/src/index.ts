@@ -33,14 +33,19 @@ const routes: Array<CommonRoutes> = [];
 app.use(cors());
 app.use(express.json());
 
+try {
+  SeederCategory.generate();
+  SeederVisitor.generate();
+  SeederClaim.generate();
+} catch {
+  console.log('error generating seeders');
+}
+
 routes.push(new CategoriesRoutes(app));
 routes.push(new VisitorRoutes(app));
 routes.push(new ClaimRoutes(app));
 
 app.listen(3000, async () => {
-  await SeederCategory.generate();
-  await SeederVisitor.generate();
-  await SeederClaim.generate();
   routes.forEach((route: CommonRoutes) => {
     log(`Routes configured for ${route.getName()}`);
   });

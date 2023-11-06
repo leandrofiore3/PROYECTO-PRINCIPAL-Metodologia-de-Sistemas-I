@@ -1,15 +1,15 @@
-import visitorRepository, { VisitorRepository } from '../../infrastructure/repositories/visitor.repository';
+import VisitorRepository from '../../infrastructure/repositories/visitor.repository';
 import CreateVisitorCommand from '../commands/createVisitorCommand';
 import Visitor from '../../domain/entities/visitor.entity';
 
-class CreateVisitorHandler{
-    private visitorRepository: VisitorRepository;
-    
-    public constructor(visitorRepository: VisitorRepository) {
-        this.visitorRepository= visitorRepository;
+class CreateVisitorHandler {
+    private visitorRepository: typeof VisitorRepository;
+
+    public constructor(visitorRepository: typeof VisitorRepository) {
+        this.visitorRepository = visitorRepository;
     }
 
-    public async execute (command: CreateVisitorCommand) :Promise<void> {
+    public async execute(command: CreateVisitorCommand): Promise<void> {
         const visitor = Visitor.create(
             command.getIp(),
             command.getNickname(),
@@ -21,5 +21,5 @@ class CreateVisitorHandler{
 }
 
 export default new CreateVisitorHandler(
-    visitorRepository
+    VisitorRepository
 );

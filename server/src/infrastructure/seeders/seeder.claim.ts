@@ -1,33 +1,26 @@
-import Category from "../../domain/entities/category.entity";
 import Claim from "../../domain/entities/claim.entity";
-import Visitor from "../../domain/entities/visitor.entity";
 import VisitorRepository from "../../infrastructure/repositories/visitor.repository";
 import CategoryRepository from "../../infrastructure/repositories/category.repository";
 import claimRepository from "../../infrastructure/repositories/claim-repository";
 
 class ClaimSeeder {
-    private claims: Claim[] = [];
-    private visitors: Visitor[] = [];
-    private categories: Category[] = [];
 
-    public constructor() {
-        this.generate();
-    }
+    public constructor() { }
 
-    public async generate() {
-        this.visitors = await VisitorRepository.findAll();
-        this.categories = await CategoryRepository.findAll();
-
-        for (const visitor of this.visitors) {
-            for (const category of this.categories) {
-                this.claims.push(Claim.create(visitor, 'Seeder claim title', 'Seeder claim description', category, "San Francisco", new Date(), null));
+    public static async generate() {
+        const visitors = await VisitorRepository.findAll();
+        const categories = await CategoryRepository.findAll();
+        const claims = [];
+        for (const visitor of visitors) {
+            for (const category of categories) {
+                claims.push(Claim.create(visitor, 'Seeder claim title', 'Seeder claim description', category, "San Francisco", new Date(), null));
             }
         }
 
-        for (const claim of this.claims) {
+        for (const claim of claims) {
             await claimRepository.save(claim);
         }
     }
 }
 
-export default new ClaimSeeder();
+export default ClaimSeeder;

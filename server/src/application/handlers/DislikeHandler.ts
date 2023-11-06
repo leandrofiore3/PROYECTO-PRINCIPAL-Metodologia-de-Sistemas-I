@@ -1,6 +1,6 @@
-import DislikeCommand from "application/commands/DislikeCommand.js";
-import ClaimRepository from "../../infrastructure/repositories/claim-repository.js";
-import Visitor from "../../domain/entities/visitor.entity.js";
+import DislikeCommand from "../../application/commands/DislikeCommand";
+import ClaimRepository from "../../infrastructure/repositories/claim-repository";
+import Visitor from "../../domain/entities/visitor.entity";
 
 class DislikeHandler {
   private claimRepository: typeof ClaimRepository;

@@ -1,4 +1,4 @@
-import ReportClaimCommand from 'application/commands/ReportClaimCommand';
+import ReportClaimCommand from '../../application/commands/ReportClaimCommand';
 import ClaimRepository from '../../infrastructure/repositories/claim-repository';
 import VisitorRepository from '../../infrastructure/repositories/visitor.repository';
 
@@ -11,7 +11,7 @@ class ReportClaimHandler {
     this.visitorRepository = visitorRepository;
   }
 
-  public async handle(command: ReportClaimCommand): Promise<void> {
+  public async handle(command: ReportClaimCommand, userId: string): Promise<void> {
     const claimId = command.getClaimId();
 
     const claim = await this.claimRepository.findOneById(claimId);
@@ -24,19 +24,16 @@ class ReportClaimHandler {
       throw new Error('Claim has already been reported.');
     }
 
-    // Obtener el usuario que realiza la denuncia 
-    const reportedBy = await this.visitorRepository.findOneById('visitorId'); // Reemplazar 'userId' 
+    const reportedBy = await this.visitorRepository.findOneById(userId);
 
     if (!reportedBy) {
       throw new Error('Reporting user does not exist');
     }
 
-    // Marcar el reclamo como reportado
-    //claim.markAsReported(reportedBy, new Date());
     claim.markAsReported();
 
     await this.claimRepository.save(claim);
   }
 }
 
-export default new ReportClaimHandler(ClaimRepository, VisitorRepository);
+export default ReportClaimHandler;

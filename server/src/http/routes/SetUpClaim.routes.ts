@@ -19,7 +19,7 @@ class ClaimRoutes extends CommonRoutes {
     this.app.get('/lastClaims', getLastClaimsAction.run);
     //this.app.post('/lastClaimsVisitor', getLastVisitorClaims.run);
     this.app.get('/lastClaimsVisitor/:id', getLastVisitorClaims.run);
-    this.app.post('/reportClaim/:claimId', ReportClaimAction.run);
+    this.app.post('/reportClaim/:claimId/:id', ReportClaimAction.run);
 
     return this.app;
   }
