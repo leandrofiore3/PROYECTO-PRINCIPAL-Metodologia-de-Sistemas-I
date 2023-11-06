@@ -24,7 +24,7 @@ class DislikeHandler {
       throw new Error("Invalid PIN");
     }
 
-    claim.dislike();
+    claim.dislike(claimId);
 
     await this.claimRepository.save(claim);
   }
