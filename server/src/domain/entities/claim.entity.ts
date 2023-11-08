@@ -13,6 +13,7 @@ class Claim {
   cloneOf: Claim | null;
   private dislikes: string[];
   private likes: string[];
+  private reported: boolean;
 
   private constructor(
     id: string,
@@ -22,6 +23,7 @@ class Claim {
     category: Category,
     location: string,
     createAt: Date,
+    cloneOf: Claim | null,
   ) {
     this.id = id;
     this.owner = owner;
@@ -30,9 +32,10 @@ class Claim {
     this.category = category;
     this.location = location;
     this.createAt = createAt;
-    this.cloneOf = null;
+    this.cloneOf = cloneOf;
     this.dislikes = [];
     this.likes = [];
+    this.reported = false; 
   }
 
   public like(id: string): void {
@@ -70,14 +73,8 @@ class Claim {
     return this.id;
   }
 
-  static create(
-    owner: Visitor,
-    title: string,
-    description: string,
-    category: Category,
-    location: string,
-  ): Claim {
-    return new Claim(v4(), owner, title, description, category, location, new Date());
+  static create(owner: Visitor, title: string, description: string, category: Category, location: string, createAt: Date, cloneOf: Claim | null): Claim {
+    return new Claim(v4(), owner, title, description, category, location, createAt, cloneOf);
   }
 
   hasVisitorLiked(id: string) {
