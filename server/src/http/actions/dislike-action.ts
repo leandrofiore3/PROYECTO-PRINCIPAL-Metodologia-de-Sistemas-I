@@ -35,4 +35,4 @@ class DislikeAction {
   }
 }
 
-export default DislikeAction;
+export default new DislikeAction(DislikeHandler);
