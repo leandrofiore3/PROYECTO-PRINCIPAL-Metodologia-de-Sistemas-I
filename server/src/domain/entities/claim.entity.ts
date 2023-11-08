@@ -46,6 +46,10 @@ class Claim {
   }
 
   public dislike(id: string): void {
+    if (this.hasVisitorDisliked(id)) {
+      throw new Error('Visitor already dislike this claim.')
+    }
+
     this.dislikes.push(id)
   }
 
@@ -77,8 +81,11 @@ class Claim {
     return new Claim(v4(), owner, title, description, category, location, createAt, cloneOf);
   }
 
-  hasVisitorLiked(id: string) {
+  public hasVisitorLiked(id: string) {
     return this.likes.includes(id);
+  }
+  public hasVisitorDisliked(id: string): boolean {
+    return this.dislikes.includes(id)
   }
 }
 
