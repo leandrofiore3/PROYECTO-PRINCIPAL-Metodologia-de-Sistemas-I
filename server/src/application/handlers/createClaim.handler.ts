@@ -34,8 +34,8 @@ class CreateClaimHandler {
             command.getDescription(),
             command.getCategory(),
             command.getLocation(),
-            command.getCreatedAt(),
-            command.getCloneOf()
+            // command.getCreatedAt(),
+            // command.getCloneOf()
         );
 
         await this.claimRepository.save(claim);

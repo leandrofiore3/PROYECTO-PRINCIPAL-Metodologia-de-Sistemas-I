@@ -9,7 +9,7 @@ class CreateVisitorHandler {
         this.visitorRepository = visitorRepository;
     }
 
-    public async execute(command: CreateVisitorCommand): Promise<void> {
+    public async execute(command: CreateVisitorCommand) {
         const visitor = Visitor.create(
             command.getIp(),
             command.getNickname(),
@@ -17,6 +17,7 @@ class CreateVisitorHandler {
         );
 
         await this.visitorRepository.save(visitor);
+        return visitor;
     }
 }
 

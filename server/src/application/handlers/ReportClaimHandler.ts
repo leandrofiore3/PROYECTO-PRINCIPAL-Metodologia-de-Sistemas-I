@@ -20,9 +20,9 @@ class ReportClaimHandler {
       throw new Error('Claim does not exist');
     }
 
-    if (claim.isReported()) {
-      throw new Error('Claim has already been reported.');
-    }
+    // if (claim.isReported()) {
+    //   throw new Error('Claim has already been reported.');
+    // }
 
     const reportedBy = await this.visitorRepository.findOneById(userId);
 
@@ -30,7 +30,7 @@ class ReportClaimHandler {
       throw new Error('Reporting user does not exist');
     }
 
-    claim.markAsReported();
+    // claim.markAsReported();
 
     await this.claimRepository.save(claim);
   }

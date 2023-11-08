@@ -11,6 +11,7 @@ class Claim {
   location: string;
   createAt: Date;
   cloneOf: Claim | null;
+  reported: boolean;
   private dislikes: string[];
   private likes: string[];
 
@@ -30,6 +31,7 @@ class Claim {
     this.category = category;
     this.location = location;
     this.createAt = createAt;
+    this.reported = false;
     this.cloneOf = null;
     this.dislikes = [];
     this.likes = [];
