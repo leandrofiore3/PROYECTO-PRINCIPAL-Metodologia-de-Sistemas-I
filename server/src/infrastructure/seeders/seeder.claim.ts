@@ -13,7 +13,7 @@ class ClaimSeeder {
         const claims = [];
         for (const visitor of visitors) {
             for (const category of categories) {
-                claims.push(Claim.create(visitor, 'Seeder claim title', 'Seeder claim description', category, "San Francisco", new Date()));
+                claims.push(Claim.create(visitor, 'Seeder claim title', 'Seeder claim description', category, "San Francisco", new Date(), null));
             }
         }
 

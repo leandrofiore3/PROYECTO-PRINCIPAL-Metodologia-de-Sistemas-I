@@ -14,7 +14,7 @@ class Claim {
   reported: boolean;
   private dislikes: string[];
   private likes: string[];
-  private reported: boolean;
+  //private reported: boolean;
 
   private constructor(
     id: string,
@@ -87,8 +87,9 @@ class Claim {
     category: Category,
     location: string,
     createdAt: Date,
+    cloneOf: Claim | null,
   ): Claim {
-    return new Claim(v4(), owner, title, description, category, location, createdAt);
+    return new Claim(v4(), owner, title, description, category, location, createdAt, cloneOf);
   }
 
   public hasVisitorLiked(id: string) {
