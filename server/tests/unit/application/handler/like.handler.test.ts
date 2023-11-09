@@ -108,7 +108,8 @@ describe('unit - like handler tests', () => {
             'un test',
             'description',
             category,
-            'location'
+            'location',
+            new Date()
         );
 
         await mockClaimRepository.save(claim)

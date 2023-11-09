@@ -70,7 +70,7 @@ class Claim {
   public isReported(): boolean {
     return this.reported;
   }
-  //public markAsReported(reportedBy: Visitor, reportedAt: Date): void {
+
   public markAsReported(): void {
     this.reported = true;
     // this.reportedBy = reportedBy;
@@ -80,8 +80,15 @@ class Claim {
     return this.id;
   }
 
-  static create(owner: Visitor, title: string, description: string, category: Category, location: string, createAt: Date, cloneOf: Claim | null): Claim {
-    return new Claim(v4(), owner, title, description, category, location, createAt, cloneOf);
+  static create(
+    owner: Visitor,
+    title: string,
+    description: string,
+    category: Category,
+    location: string,
+    createdAt: Date,
+  ): Claim {
+    return new Claim(v4(), owner, title, description, category, location, createdAt);
   }
 
   public hasVisitorLiked(id: string) {
