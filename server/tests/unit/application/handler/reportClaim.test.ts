@@ -37,7 +37,7 @@ describe('ReportClaimAction', () => {
     test('should report a claim successfully', async () => {
         const mockVisitor = Visitor.create("197.0.0.1", "pepe", "123456");
         const mockCategory = Category.create("category1", "green")
-        const mockClaim = Claim.create(mockVisitor, "title", "description", mockCategory, "SanFco");
+        const mockClaim = Claim.create(mockVisitor, "title", "description", mockCategory, "SanFco", new Date());
 
         mockClaimRepository.findOneById = jest.fn().mockResolvedValue(mockClaim);
         mockVisitorRepository.findOneById = jest.fn().mockResolvedValue(mockVisitor);

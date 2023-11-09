@@ -11,20 +11,22 @@ export class ClaimMother {
       'un titulo',
       'descripcion',
       category,
-      'una ubicacion'
+      'una ubicacion',
+      new Date()
     )
   }
 
   static withLikes(visitor: Visitor, category: Category, strings: string[]) {
 
-    const claim =Claim.create(
+    const claim = Claim.create(
       visitor,
       'un titulo',
       'descripcion',
       category,
-      'una ubicacion'
+      'una ubicacion',
+      new Date()
     )
-    strings.forEach((id ) => {
+    strings.forEach((id) => {
       claim.like(id)
     })
 

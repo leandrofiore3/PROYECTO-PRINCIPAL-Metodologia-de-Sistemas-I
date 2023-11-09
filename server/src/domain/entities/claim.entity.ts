@@ -62,7 +62,7 @@ class Claim {
   public isReported(): boolean {
     return this.reported;
   }
-  //public markAsReported(reportedBy: Visitor, reportedAt: Date): void {
+
   public markAsReported(): void {
     this.reported = true;
     // this.reportedBy = reportedBy;
@@ -78,8 +78,9 @@ class Claim {
     description: string,
     category: Category,
     location: string,
+    createdAt: Date,
   ): Claim {
-    return new Claim(v4(), owner, title, description, category, location, new Date());
+    return new Claim(v4(), owner, title, description, category, location, createdAt);
   }
 
   hasVisitorLiked(id: string) {

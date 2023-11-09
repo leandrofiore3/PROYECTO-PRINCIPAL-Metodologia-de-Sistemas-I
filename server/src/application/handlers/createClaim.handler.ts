@@ -3,7 +3,7 @@ import CreateClaimCommand from '../commands/createClaim.command';
 import ClaimRepository from '../../infrastructure/repositories/claim-repository';
 import Claim from '../../domain/entities/claim.entity';
 
-class CreateClaimHandler {
+export class CreateClaimHandler {
     private visitorRepository: typeof VisitorRepository;
     private claimRepository: typeof ClaimRepository;
 
@@ -34,8 +34,7 @@ class CreateClaimHandler {
             command.getDescription(),
             command.getCategory(),
             command.getLocation(),
-            // command.getCreatedAt(),
-            // command.getCloneOf()
+            command.getCreatedAt()
         );
 
         await this.claimRepository.save(claim);
