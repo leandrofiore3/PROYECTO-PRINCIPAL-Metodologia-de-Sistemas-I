@@ -14,6 +14,7 @@ class Claim {
   reported: boolean;
   private dislikes: string[];
   private likes: string[];
+  private reported: boolean;
 
   private constructor(
     id: string,
@@ -23,6 +24,7 @@ class Claim {
     category: Category,
     location: string,
     createAt: Date,
+    cloneOf: Claim | null,
   ) {
     this.id = id;
     this.owner = owner;
@@ -31,10 +33,12 @@ class Claim {
     this.category = category;
     this.location = location;
     this.createAt = createAt;
+    this.cloneOf = cloneOf;
     this.reported = false;
-    this.cloneOf = null;
+    this.cloneOf = cloneOf;
     this.dislikes = [];
     this.likes = [];
+    this.reported = false; 
   }
 
   public like(id: string): void {
@@ -45,6 +49,10 @@ class Claim {
   }
 
   public dislike(id: string): void {
+    if (this.hasVisitorDisliked(id)) {
+      throw new Error('Visitor already dislike this claim.')
+    }
+
     this.dislikes.push(id)
   }
 
@@ -83,8 +91,11 @@ class Claim {
     return new Claim(v4(), owner, title, description, category, location, createdAt);
   }
 
-  hasVisitorLiked(id: string) {
+  public hasVisitorLiked(id: string) {
     return this.likes.includes(id);
+  }
+  public hasVisitorDisliked(id: string): boolean {
+    return this.dislikes.includes(id)
   }
 }
 
