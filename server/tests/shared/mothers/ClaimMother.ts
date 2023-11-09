@@ -12,7 +12,8 @@ export class ClaimMother {
       'descripcion',
       category,
       'una ubicacion',
-      new Date()
+      new Date(),
+      null
     )
   }
 
@@ -24,7 +25,8 @@ export class ClaimMother {
       'descripcion',
       category,
       'una ubicacion',
-      new Date()
+      new Date(),
+      null
     )
     strings.forEach((id) => {
       claim.like(id)
