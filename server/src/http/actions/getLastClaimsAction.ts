@@ -8,7 +8,7 @@ class GetLastClaimsAction {
 
             res.status(200).json(lastClaims);
         } catch (error) {
-            res.status(500).json({ error: 'Error al obtener los reclamos más recientes.' });
+            res.status(500).json({ error: 'Error retrieving last claims' });
         }
     }
 }

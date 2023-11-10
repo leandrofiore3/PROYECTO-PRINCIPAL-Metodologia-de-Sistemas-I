@@ -15,14 +15,14 @@ export class CreateClaimHandler {
         this.claimRepository = claimRepository;
     }
 
-    public async execute(command: CreateClaimCommand): Promise<void> {
+    public async execute(command: CreateClaimCommand): Promise<Claim> {
         const owner = await this.visitorRepository.findOneById(command.getId());
 
         if (!owner) {
             throw new Error('Owner does not exist');
         }
 
-        const isPinValid = this.validatePin(command.getVisitorPin());
+        const isPinValid = this.validatePin(owner.pin);
 
         if (!isPinValid) {
             throw new Error('Visitor PIN is invalid');
@@ -39,6 +39,7 @@ export class CreateClaimHandler {
         );
 
         await this.claimRepository.save(claim);
+        return claim;
     }
 
     private validatePin(pin: string): boolean {

@@ -4,11 +4,12 @@ import LikeHandler from "../../application/handlers/like.handler";
 
 class LikeAction {
   async run(req: Request, res: Response) {
-    const { id, owner, pin } = req.body;
+    const { claimId, owner, pin } = req.body;
 
     try {
-      const command = new LikeCommand(id, owner, pin);
-      if (!id || !pin) {
+      const command = new LikeCommand(claimId, owner, pin);
+
+      if (!claimId || !pin) {
         res.status(400).json({ message: 'Claim ID and PIN are required' });
         return
       }

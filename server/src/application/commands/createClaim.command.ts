@@ -67,10 +67,6 @@ class CreateClaimCommand {
     public getOwnerId(): string {
         return this.owner.getId();
     }
-
-    public getVisitorPin(): string {
-        return this.owner.getPin();
-    }
 }
 
 export default CreateClaimCommand;

@@ -1,4 +1,4 @@
-import { v4 } from 'uuid';
+import { generateUuid } from "../../utils/generateUuid";
 
 class Visitor {
     id: string;
@@ -18,7 +18,7 @@ class Visitor {
     }
 
     public static create(ip: string, nickname: string, pin: string): Visitor {
-        return new Visitor(v4(), ip, nickname, pin);
+        return new Visitor(generateUuid(), ip, nickname, pin);
 
     }
     getPin(): string {

@@ -6,7 +6,6 @@ class CreateClaimAction {
     public async run(req: Request, res: Response) {
         const { owner, title, description, category, location, createdAt, cloneOf } = req.body;
         try {
-            console.log(req.body);
             if (!owner || !title || !description || !category || !location || !createdAt) {
                 return res.status(400).json({ message: "All fields are required" });
             }
@@ -20,10 +19,11 @@ class CreateClaimAction {
                 createdAt,
                 cloneOf
             );
-            await CreateClaimHandler.execute(command);
+
+            const newClaim = await CreateClaimHandler.execute(command);
 
             return res.status(201).json(
-                { message: "Claim created sucessfully" }
+                { message: `Claim ID${newClaim.id} created sucessfully` }
             );
         } catch (error) {
             const { message } = error as Error;

@@ -1,6 +1,6 @@
-import { v4 } from 'uuid';
-import Visitor from "./visitor.entity.js";
-import Category from "./category.entity.js";
+import Visitor from "./visitor.entity";
+import Category from "./category.entity";
+import { generateUuid } from "../../utils/generateUuid";
 
 class Claim {
   id: string;
@@ -14,7 +14,6 @@ class Claim {
   reported: boolean;
   private dislikes: string[];
   private likes: string[];
-  //private reported: boolean;
 
   private constructor(
     id: string,
@@ -38,7 +37,6 @@ class Claim {
     this.cloneOf = cloneOf;
     this.dislikes = [];
     this.likes = [];
-    this.reported = false; 
   }
 
   public like(id: string): void {
@@ -73,8 +71,6 @@ class Claim {
 
   public markAsReported(): void {
     this.reported = true;
-    // this.reportedBy = reportedBy;
-    //this.reportedAt = reportedAt;
   }
   getId(): string {
     return this.id;
@@ -89,7 +85,7 @@ class Claim {
     createdAt: Date,
     cloneOf: Claim | null,
   ): Claim {
-    return new Claim(v4(), owner, title, description, category, location, createdAt, cloneOf);
+    return new Claim(generateUuid(), owner, title, description, category, location, createdAt, cloneOf);
   }
 
   public hasVisitorLiked(id: string) {

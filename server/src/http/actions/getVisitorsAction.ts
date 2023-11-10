@@ -4,13 +4,11 @@ import visitorRepository from "../../infrastructure/repositories/visitor.reposit
 class GetVisitorsAction {
     public async run(_req: Request, res: Response) {
         try {
-
             const categories = await visitorRepository.findAll();
 
             res.status(200).json(categories);
         } catch (error) {
-
-            res.status(500).json({ error: 'Error al obtener las categorías.' });
+            res.status(500).json({ error: 'Error retrieving categories' });
         }
     }
 }

@@ -2,7 +2,7 @@ import { Application } from 'express';
 import CommonRoutes from './common.routes';
 import CreateClaimAction from '../actions/CreateClaimAction';
 import likeAction from '../actions/like.action';
-import  DislikeAction  from '../actions/dislike-action';
+import DislikeAction from '../actions/dislike-action';
 import getLastFiveAction from '../../http/actions/getLastFive.action';
 import getLastClaimsAction from '../../http/actions/getLastClaimsAction';
 import getLastVisitorClaims from '../../http/actions/getLastVisitorClaims';
@@ -15,8 +15,8 @@ class ClaimRoutes extends CommonRoutes {
 
   public setUpRoutes(): Application {
     this.app.post('/claim', CreateClaimAction.run);
-    this.app.put('/claim/:id/like', likeAction.run);
-    this.app.put('/claim/:id/dislike', DislikeAction.run);
+    this.app.put('/claim/like', likeAction.run);
+    this.app.put('/claim/dislike', DislikeAction.run);
     this.app.get('/fiveOnFire', getLastFiveAction.run);
     this.app.get('/lastClaims', getLastClaimsAction.run);
     this.app.get('/lastClaimsVisitor/:id', getLastVisitorClaims.run);

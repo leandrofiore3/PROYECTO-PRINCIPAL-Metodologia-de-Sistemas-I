@@ -1,7 +1,9 @@
 import Claim from "../../domain/entities/claim.entity";
+import { compareDesc } from 'date-fns';
 
 class ClaimRepository {
   private claims: Claim[];
+
   public constructor() {
     this.claims = [];
   }
@@ -20,8 +22,9 @@ class ClaimRepository {
   }
 
   public async findLast5Claims(): Promise<Claim[]> {
+
     const sortedClaims = this.claims.sort((a, b) => {
-      return b.createAt.getTime() - a.createAt.getTime();
+      return compareDesc(a.createAt, b.createAt);
     });
 
     const last5Claims = sortedClaims.slice(0, 5);
@@ -42,7 +45,7 @@ class ClaimRepository {
 
   public async findLastClaimsByVisitorId(visitorId: string) {
     const visitorClaims = this.claims.filter((a) => {
-      return a.owner.getId() === visitorId;
+      return a.owner.id === visitorId;
     });
 
     return visitorClaims;

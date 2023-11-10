@@ -24,13 +24,11 @@ export class LikeHandler {
       throw new Error('Claim not found');
     }
 
-    // hacer un metodo para validar el pin
     if (visitor.pin !== pin) {
       throw new Error('Invalid PIN');
     }
 
     claim.like(owner);
-
     await this.claimRepository.save(claim);
   }
 }

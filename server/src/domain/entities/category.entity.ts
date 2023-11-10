@@ -1,4 +1,4 @@
-import { v4 } from 'uuid';
+import { generateUuid } from "../../utils/generateUuid";
 
 class Category {
     id: string;
@@ -16,7 +16,7 @@ class Category {
     }
 
     static create(name: string, color: string): Category {
-        return new Category(v4(), name, color);
+        return new Category(generateUuid(), name, color);
     }
 }
 

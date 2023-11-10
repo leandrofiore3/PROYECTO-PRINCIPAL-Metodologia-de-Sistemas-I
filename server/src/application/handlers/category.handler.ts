@@ -13,13 +13,13 @@ class CategoryHandler {
     const { categoryId } = req.params;
 
     if (!categoryId) {
-      return res.status(401).send("Categoría no enviada");
+      return res.status(401).send("Category null");
     }
 
     const category = CategoryRepository.findOneById(categoryId);
 
     if (!category) {
-      return res.status(404).json({ message: 'Categoría no encontrada' });
+      return res.status(404).json({ message: 'Category not found' });
     }
 
     return res.status(200).json(category);
@@ -29,7 +29,7 @@ class CategoryHandler {
     const { name, color } = req.body;
 
     if (!name || !color) {
-      return res.status(400).json({ message: 'Nombre y color son campos obligatorios' });
+      return res.status(400).json({ message: 'Name and color are required' });
     }
 
     const newCategory = Category.create(name, color);
